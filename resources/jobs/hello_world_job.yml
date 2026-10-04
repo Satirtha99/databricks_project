@@ -1,7 +1,7 @@
 resources:
   jobs:
     hello_world_job:
-      name: "Hello_World_Job_Test"
+      name: "Hello_World_Job_Test1"
 
       tasks:
         - task_key: hello_world_task

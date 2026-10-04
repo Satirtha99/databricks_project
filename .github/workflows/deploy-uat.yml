@@ -1,20 +1,20 @@
-name: Validate Databricks Bundle
+name: Deploy Databricks DEV
 
 on:
-  pull_request:
+  push:
     branches:
-      - main
+      - uat
 
 permissions:
   contents: read
 
 jobs:
-  validate:
-    name: Validate DAB
+  deploy:
+    name: Deploy DAB to UAT
     runs-on: ubuntu-latest
 
     environment:
-      name: dev
+      name: uat
 
     steps:
       - name: Checkout repository
@@ -24,7 +24,13 @@ jobs:
         uses: databricks/setup-cli@main
 
       - name: Validate bundle
-        run: databricks bundle validate --target dev
+        run: databricks bundle validate --target uat
+        env:
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
+      - name: Deploy bundle
+        run: databricks bundle deploy --target uat
         env:
           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
