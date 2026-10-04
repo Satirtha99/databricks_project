@@ -18,10 +18,14 @@ targets:
 
   uat:
     mode: production
+    workspace:
+      root_path: /Workspace/Users/satirtha589@gmail.com/.bundle/${bundle.name}/${bundle.target}
     variables:
       environment: uat
 
   prod:
     mode: production
+    workspace:
+      root_path: /Workspace/Users/satirtha589@gmail.com/.bundle/${bundle.name}/${bundle.target}
     variables:
       environment: prod
