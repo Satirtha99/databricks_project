@@ -4,11 +4,6 @@ bundle:
 include:
   - resources/jobs/*.yml
 
-variables:
-  databricks_host:
-    description: Databricks workspace URL
-    type: string
-
 targets:
   dev:
     mode: development
