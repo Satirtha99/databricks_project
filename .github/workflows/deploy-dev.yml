@@ -1,20 +1,22 @@
-name: Deploy Databricks DEV
+name: Deploy Databricks Bundle
 
 on:
   push:
     branches:
-      - main
+      - dev
+      - uat
+      - prod
 
 permissions:
   contents: read
 
 jobs:
   deploy:
-    name: Deploy DAB to DEV
+    name: Deploy DAB to ${{ github.ref_name }}
     runs-on: ubuntu-latest
 
     environment:
-      name: dev
+      name: ${{ github.ref_name }}
 
     steps:
       - name: Checkout repository
@@ -24,13 +26,13 @@ jobs:
         uses: databricks/setup-cli@main
 
       - name: Validate bundle
-        run: databricks bundle validate --target dev
+        run: databricks bundle validate --target ${{ github.ref_name }}
         env:
           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
 
       - name: Deploy bundle
-        run: databricks bundle deploy --target dev
+        run: databricks bundle deploy --target ${{ github.ref_name }}
         env:
           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}

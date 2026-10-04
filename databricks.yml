@@ -4,7 +4,28 @@ bundle:
 include:
   - resources/jobs/*.yml
 
+variables:
+  environment:
+    description: "Deployment environment context"
+    default: "dev"
+
 targets:
   dev:
     mode: development
     default: true
+    variables:
+      environment: dev
+
+  uat:
+    mode: production
+    workspace:
+      root_path: /Workspace/Users/satirtha589@gmail.com/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      environment: uat
+
+  prod:
+    mode: production
+    workspace:
+      root_path: /Workspace/Users/satirtha589@gmail.com/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      environment: prod
