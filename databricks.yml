@@ -1,0 +1,18 @@
+bundle:
+  name: my_databricks_project
+
+include:
+  - resources/jobs/*.yml
+
+variables:
+  databricks_host:
+    description: Databricks workspace URL
+    type: string
+
+targets:
+  dev:
+    mode: development
+    default: true
+
+    workspace:
+      host: ${var.databricks_host}

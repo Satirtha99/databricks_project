@@ -1,0 +1,10 @@
+resources:
+  jobs:
+    hello_world_job:
+      name: "[${bundle.target}]_Hello_World_Job"
+
+      tasks:
+        - task_key: hello_world_task
+
+          notebook_task:
+            notebook_path: ../src/notebooks/hello_world.py
