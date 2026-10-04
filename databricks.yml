@@ -13,6 +13,3 @@ targets:
   dev:
     mode: development
     default: true
-
-    workspace:
-      host: ${var.databricks_host}
