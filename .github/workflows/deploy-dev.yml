@@ -18,7 +18,7 @@ jobs:
 
     environment:
       name: ${{ github.ref_name }}
-    
+
     env:
       DATABRICKS_AUTH_TYPE: github-oidc
       DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
