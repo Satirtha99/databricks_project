@@ -1,10 +1,12 @@
 resources:
   jobs:
     hello_world_job:
-      name: "Hello_World_Job_Test1"
+      name: "Hello_World_Job"
 
       tasks:
         - task_key: hello_world_task
 
           notebook_task:
             notebook_path: ../../src/notebooks/hello_world.py
+            base_parameters:
+              environment: ${var.environment}
