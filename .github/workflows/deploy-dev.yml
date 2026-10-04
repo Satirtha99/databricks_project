@@ -1,4 +1,4 @@
-name: Deploy Databricks DEV
+name: Deploy Databricks ${{ github.ref_name }}
 
 on:
   push:
@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   deploy:
-    name: Deploy DAB to DEV
+    name: Deploy DAB to ${{ github.ref_name }}
     runs-on: ubuntu-latest
 
     environment:
