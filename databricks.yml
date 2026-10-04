@@ -4,7 +4,24 @@ bundle:
 include:
   - resources/jobs/*.yml
 
+variables:
+  environment:
+    description: "Deployment environment context"
+    default: "dev"
+
 targets:
   dev:
     mode: development
     default: true
+    variables:
+      environment: dev
+
+  uat:
+    mode: production
+    variables:
+      environment: uat
+
+  prod:
+    mode: production
+    variables:
+      environment: prod
