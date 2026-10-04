@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   deploy:
@@ -17,6 +18,11 @@ jobs:
 
     environment:
       name: ${{ github.ref_name }}
+    
+    env:
+      DATABRICKS_AUTH_TYPE: github-oidc
+      DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+      DATABRICKS_CLIENT_ID: a2ea8b7f-4d91-4ed7-8832-d908d6ebbdde
 
     steps:
       - name: Checkout repository
@@ -27,12 +33,6 @@ jobs:
 
       - name: Validate bundle
         run: databricks bundle validate --target ${{ github.ref_name }}
-        env:
-          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
 
       - name: Deploy bundle
         run: databricks bundle deploy --target ${{ github.ref_name }}
-        env:
-          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
