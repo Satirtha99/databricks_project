@@ -1,0 +1,10 @@
+bundle:
+  name: my_databricks_project
+
+include:
+  - resources/jobs/*.yml
+
+targets:
+  dev:
+    mode: development
+    default: true
