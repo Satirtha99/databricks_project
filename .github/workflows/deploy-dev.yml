@@ -1,4 +1,4 @@
-name: Deploy Databricks ${{ github.ref_name }}
+name: Deploy Databricks Bundle
 
 on:
   push:
