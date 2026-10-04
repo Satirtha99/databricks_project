@@ -1,7 +1,7 @@
 resources:
   jobs:
     hello_world_job:
-      name: "[${bundle.target}]_Hello_World_Job"
+      name: "Hello_World_Job_Test"
 
       tasks:
         - task_key: hello_world_task
