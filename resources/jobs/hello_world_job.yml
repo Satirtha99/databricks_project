@@ -8,3 +8,5 @@ resources:
 
           notebook_task:
             notebook_path: ../../src/notebooks/hello_world.py
+            base_parameters:
+              environment: ${var.environment}
