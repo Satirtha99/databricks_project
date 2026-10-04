@@ -7,4 +7,4 @@ resources:
         - task_key: hello_world_task
 
           notebook_task:
-            notebook_path: ../src/notebooks/hello_world.py
+            notebook_path: ../src/notebooks/hello_world
