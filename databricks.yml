@@ -21,7 +21,7 @@ targets:
     workspace:
       root_path: /Workspace/Users/satirtha589@gmail.com/.bundle/${bundle.name}/${bundle.target}
     run_as:
-      service_principal_name: a2ea8b7f-4d91-4ed7-8832-d908d6ebbdde
+      # service_principal_name: a2ea8b7f-4d91-4ed7-8832-d908d6ebbdde
     variables:
       environment: uat
 
@@ -30,6 +30,6 @@ targets:
     workspace:
       root_path: /Workspace/Users/satirtha589@gmail.com/.bundle/${bundle.name}/${bundle.target}
     run_as:
-      service_principal_name: a2ea8b7f-4d91-4ed7-8832-d908d6ebbdde
+      # service_principal_name: a2ea8b7f-4d91-4ed7-8832-d908d6ebbdde
     variables:
       environment: prod
