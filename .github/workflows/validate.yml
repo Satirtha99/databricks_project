@@ -3,7 +3,9 @@ name: Validate Databricks Bundle
 on:
   pull_request:
     branches:
-      - main
+      - dev
+      - uat
+      - prod
 
 permissions:
   contents: read
