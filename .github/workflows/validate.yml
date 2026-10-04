@@ -17,6 +17,10 @@ jobs:
 
     environment:
       name: ${{ github.base_ref }}
+    
+    env:
+      DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
 
     steps:
       - name: Checkout repository
@@ -27,6 +31,3 @@ jobs:
 
       - name: Validate bundle
         run: databricks bundle validate --target ${{ github.base_ref }}
-        env:
-          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
