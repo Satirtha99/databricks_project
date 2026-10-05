@@ -53,4 +53,11 @@ jobs:
           echo "Commit message: $GITHUB_COMMIT_MESSAGE"
 
           databricks jobs run-now "$JOB_ID" \
-            --notebook-params "commit_msg=$GITHUB_COMMIT_MESSAGE"
+            --json "$(jq -n \
+              --arg commit_msg "$GITHUB_COMMIT_MESSAGE" \
+              '{
+                notebook_params: {
+                  commit_msg: $commit_msg
+                }
+              }'
+            )"
