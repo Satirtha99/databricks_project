@@ -52,10 +52,12 @@ jobs:
           echo "Running Hello_World_Job with Job ID: $JOB_ID"
           echo "Commit message: $GITHUB_COMMIT_MESSAGE"
 
-          databricks jobs run-now "$JOB_ID" \
+          databricks jobs run-now \
             --json "$(jq -n \
+              --arg job_id "$JOB_ID" \
               --arg commit_msg "$GITHUB_COMMIT_MESSAGE" \
               '{
+                job_id: ($job_id | tonumber),
                 notebook_params: {
                   commit_msg: $commit_msg
                 }
