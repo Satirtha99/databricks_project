@@ -10,3 +10,4 @@ resources:
             notebook_path: ../../src/notebooks/hello_world.py
             base_parameters:
               environment: ${var.environment}
+              commit_msg: ""
