@@ -34,3 +34,8 @@ jobs:
 
       - name: Deploy bundle
         run: databricks bundle deploy --target ${{ github.ref_name }}
+
+      - name: Run Hello World Job
+        run: |
+          JOB_ID=$(databricks jobs list --output json | jq -r '.jobs[] | select(.settings.name == "Hello_World_Job") | .job_id' | head -n 1)
+          databricks jobs run-now "$JOB_ID"
