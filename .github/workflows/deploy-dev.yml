@@ -21,6 +21,7 @@ jobs:
     env:
       DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
       DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+      GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
 
     steps:
       - name: Checkout repository
@@ -30,7 +31,35 @@ jobs:
         uses: databricks/setup-cli@main
 
       - name: Validate bundle
-        run: databricks bundle validate --target ${{ github.ref_name }}
+        run: |
+          databricks bundle validate --target ${{ github.ref_name }}
 
       - name: Deploy bundle
-        run: databricks bundle deploy --target ${{ github.ref_name }}
+        run: |
+          databricks bundle deploy --target ${{ github.ref_name }}
+
+      - name: Run Hello World Job
+        run: |
+          JOB_ID=$(databricks jobs list --output json \
+            | jq -r '.[] | select(.settings.name == "Hello_World_Job") | .job_id' \
+            | head -n 1)
+
+          if [ -z "$JOB_ID" ]; then
+            echo "Hello_World_Job not found"
+            exit 1
+          fi
+
+          echo "Running Hello_World_Job with Job ID: $JOB_ID"
+          echo "Commit message: $GITHUB_COMMIT_MESSAGE"
+
+          databricks jobs run-now \
+            --json "$(jq -n \
+              --arg job_id "$JOB_ID" \
+              --arg commit_msg "$GITHUB_COMMIT_MESSAGE" \
+              '{
+                job_id: ($job_id | tonumber),
+                notebook_params: {
+                  commit_msg: $commit_msg
+                }
+              }'
+            )"
